@@ -1,0 +1,16 @@
+rinkeby:
+  transferProxyContractAddress: 'ETH_TRANSFER_PROXY_CONTRACT_ADDRESS_HERE'
+  tokenAddress: 'TOKEN_ADDRESS_HERE'
+  tradeContractAddress: 'TRADE_CONTRACT_ADDRESS_HERE'
+  tokenURIPrefix: 'https://gateway.pinata.cloud/ipfs/'
+  tokenSymbol: WETH
+  baseCoin: ETH
+  admin_user: ['ADMIN_USER'] # only admin user have access for mystery box
+matic-test:
+  transferProxyContractAddress: 'MATIC_TRANSFER_PROXY_CONTRACT_ADDRESS_HERE'
+  tokenAddress: 'TOKEN_ADDRESS_HERE'
+  tradeContractAddress: 'MATIC_TRADE_CONTRACT_ADDRESS_HERE'
+  tokenURIPrefix: 'https://gateway.pinata.cloud/ipfs/'
+  tokenSymbol: WMATIC
+  baseCoin: MATIC
+  admin_user: ['ADMIN_USER'] # only admin user have access for mystery box

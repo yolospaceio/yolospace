@@ -1,0 +1,56 @@
+<!-- 
+<div class="my-explore-div all games">
+<div class="my-explore-div all photography">
+<div class="my-explore-div all art">
+-->
+
+<% collection_attachment = collection.get_attachment(current_user)%>
+<div class="card">
+  <div class="t_c">
+
+    <a href="<%= collection_path(collection.address)%>" class="card__cover">
+        <span class="collection-card-img" style="background-image: url('<%= cover_url(collection) %>')">
+           <%= image_tag cover_url(collection)%>
+        </span>
+    </a>
+    <% if current_user %>
+      <%= react_component("collections/like", address: current_user&.address, isLiked: collection.isLiked?(current_user&.id), collectionId: collection.id, likes_count: collection.likes.length) %>
+    <% else %>
+      <button class="card__likes heart show-login-message">
+        <i class="far fa-heart"></i>
+        <i class="fas fa-heart"></i>
+        <span><%= collection.likes.count%></span>
+      </button>  
+    <% end %>
+
+  </div>
+  <div class="grid-box">
+    <h3 class="card__title" data-toggle="tooltip" data-placement="top" title="<%= collection.title %>">
+      <a href="<%= collection_path(collection.address)%>"><%= collection.title %></a>
+    </h3>
+
+    <div class="card__author">
+      <%= image_tag collection.owner.profile_image %>
+      <a href="<%=user_path(collection.owner.address)%>" data-toggle="tooltip" data-placement="top" title="@<%= collection.owner.full_name%>">@<%= collection.owner.full_name%></a>
+    </div>
+  </div>
+  
+    <div class="card__info">
+      <div class="card__price">
+        <span><%= t('shared.reserve_price')%></span>
+        <span class="one-lasted">
+          <%symbol = ['', 'eth','' ,'matic']%>
+          <img src="/assets/<%=symbol[collection.network_id]%>.svg" class="pk_img <%=symbol[collection.network_id]%>_img">
+          <% if collection.instant_sale_price%>
+          <span><%=collection.instant_sale_price%> <%= collection.erc20_token.symbol %></span>  
+          <% else %>
+            <% if collection.max_bid %>
+              <p class="bid_status">Highest bid <b><%= collection.max_bid.value %></b></p>
+            <%else%>
+              <span><%= t('collections.show.no_active_bids') %></span> 
+            <% end %>
+          <%end%>
+        </span>
+      </div>
+    </div>
+</div>

@@ -1,0 +1,17 @@
+<div class="share_via">
+  &nbsp;&nbsp;&nbsp;&nbsp;<%= t('collections.show.share_via') %>
+  <div class="social-media-share-btn-grp">
+    <a class="social-media-share-btn" target=_blank href="https://www.facebook.com/sharer/sharer.php?u=<%= current_url %>&caption=<%= @collection.name %>&description=<%= @collection.description %>" onclick="javascript:window.open(this.href, '', 'menubar=no,toolbar=no,resizable=yes,scrollbars=yes,height=600,width=600');return false;">
+    <i class="fa fa-facebook"></i>
+    </a>
+    <a class="social-media-share-btn" target=_blank href="https://twitter.com/share?url=<%= current_url %>&text=<%= @collection.name %>, <%= @collection.description %>" onclick="javascript:window.open(this.href, '', 'menubar=no,toolbar=no,resizable=yes,scrollbars=yes,height=600,width=600');return false;">
+      <i class="fa fa-twitter"></i>
+    </a>
+    <a class="social-media-share-btn" target=_blank href="https://telegram.me/share/url?url=<%= current_url %>&text=<%= @collection.name %>, <%= @collection.description %>" onclick="javascript:window.open(this.href, '', 'menubar=no,toolbar=no,resizable=yes,scrollbars=yes,height=600,width=600');return false;">
+      <i class="fa fa-telegram"></i>
+    </a>
+    <a class="social-media-share-btn" target=_blank href="mailto:?subject=<%= @collection.name %>&body=<%= @collection.description %> Link here:<%= current_url %>">
+      <i class="fa fa-envelope"></i>
+    </a>
+  </div>
+</div>

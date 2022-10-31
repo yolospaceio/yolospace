@@ -1,0 +1,54 @@
+<% if activity.event == 'create' || activity.event == 'list' ||
+        (activity.event == 'update' &&
+                Collection.is_valid_activity(activity) &&
+                (!activity.changeset["state"].present? ||
+                        (activity.changeset["state"].present? && activity.changeset["state"] != ["pending", "approved"]))) %>
+
+    <div class="asset__action asset__action--verified">
+      <% if ['create', 'list'].include?(activity.event) && activity.item.present? %>
+
+          <%= link_to user_path(activity.item.creator.address), class:"user_img" do %>
+              <%= image_tag url_for(activity.item.creator.profile_image) %>
+          <% end %>
+          <%if !@collection.is_lazy_minted? %>
+            <p class="content_details"><%= (activity.event == 'list') ? 'Listed' : 'Minted' %> <%= time_ago_in_words(activity.created_at) %> ago <br>by <%= link_to_user(activity.item.creator,"@")%> </p>
+          <%else%>
+            <p class="content_details">Created <%= time_ago_in_words(activity.created_at) %> ago <br>by <%= link_to_user(activity.item.creator,"@")%> </p>
+          <%end%>
+
+      <% else %>
+          <% owner_name = activity.next ? activity.next&.reify&.owner&.full_name : activity.item&.owner&.full_name %>
+          <% if activity.event == "update" %>
+              <% if activity.changeset.keys.include?("owner_id") || activity.changeset.keys.include?("owned_tokens") %>
+                 <% activity_dup = activity.dup %>
+                  <%= link_to user_path(activity.reify&.owner&.address), class:"user_img" do %>
+                      <%= image_tag url_for(activity.reify.owner.profile_image) %>
+                  <% end %>
+                  <p class="content_details">
+                    <% if activity.changeset.keys.include?("owned_tokens") %>
+                      @<%= link_to owner_name, user_path(activity_dup.item&.owner&.address)%> transfered <%= activity.changeset["owned_tokens"][0] - activity.changeset["owned_tokens"][1] %> number of copies <br/><%= time_ago_in_words(activity.created_at) %> ago 
+                    <% else %>
+                      Transfered <%= time_ago_in_words(activity.created_at) %> ago from <%= activity.reify.owner.full_name %> <br>to @<%= link_to owner_name, user_path(activity_dup.item.owner.address)%>
+                    <% end %>
+                  </p>
+              <% elsif activity.changeset.keys.include?("instant_sale_price") %>
+
+                  <%= link_to user_path(activity.item.owner.address), class:"user_img" do %>
+                      <%= image_tag url_for(activity.item.owner.profile_image) %>
+                  <% end %>
+                  <p class="content_details"><%=t('collections.show.price_updated')%> at <%= time_ago_in_words(activity.created_at) %> ago to <%= activity.changeset["instant_sale_price"].last %> <br>by <%=link_to_activity_user(owner_name,user_path(activity.item.owner.address),'@')%></p>
+              <% elsif activity.changeset.keys.include?("put_on_sale") %>
+                  <%= link_to user_path(activity.item.owner.address), class:"user_img" do %>
+                      <%= image_tag url_for(activity.item.owner.profile_image) %>
+                  <% end %>
+                  <p class="content_details">Put on sale on <%= time_ago_in_words(activity.created_at) %> ago <br>by <%=link_to_activity_user(owner_name,user_path(activity.item.owner.address),'@')%> </p>
+              <% elsif activity.changeset["state"].present? && activity.changeset["state"] == ["approved", "burned"] %>
+                  <%= link_to user_path(activity.item.owner.address), class:"user_img" do %>
+                      <%= image_tag url_for(activity.item.owner.profile_image), class: 'img-responsive' %>
+                      <% end %>
+                      <p class="content_details">Burned at <%= time_ago_in_words(activity.created_at) %> ago <br>by @<%= link_to owner_name, user_path(activity.item.owner.address)%> </p>
+                  <% end %>
+              <% end %>
+          <% end %>
+          </div>
+      <% end %>

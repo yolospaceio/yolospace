@@ -1,0 +1,12 @@
+<div class="header__action header__action--profile network-dropdown">
+    <a class="header__profile-btn header__profile-btn--verified" href="javascript:void(0);" role="button" id="dropdownMenuProfile" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+      <%= Current.network.name%>
+      <i class="fas fa-chevron-down"></i>
+    </a>
+
+    <ul class="dropdown-menu header__profile-menu" aria-labelledby="dropdownMenuProfile">
+        <% Network.all.each do |network| %>
+            <li><a class="dropdown-item" href="<%= "/change_network/?chain_id=#{network.chain_id}"%>"><%= network.name %></a></li>
+        <%end%>
+    </ul>
+</div>

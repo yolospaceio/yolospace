@@ -1,0 +1,16 @@
+<div class="row">
+  <% mystery_boxes.each do |list| %>
+    <div class="col-12 col-md-6 col-lg-4">
+        <div class="mystery-layer gradient-border">
+          <div class="all-mystery">
+            <div class="gift-images">
+              <img src="/assets/gift.gif" class="img-responsive gift-img">
+            </div>
+            <div class="gift-content">
+              <a href="javascript:void(0);" onclick="window.ownerTransferMysteryBox('<%= list.collection.address%>', '<%= list.user_address%>', <%= list.no_of_copies%>, <%= list.id%>)" class="btn-gift"><%= t('users.show.claim') %></a>
+            </div>
+          </div>
+        </div>
+    </div>
+  <% end %> 
+</div>

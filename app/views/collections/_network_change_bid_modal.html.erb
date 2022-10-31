@@ -1,0 +1,14 @@
+<%chain_id = Network.find_by_id(@collection.network_id)&.chain_id%>
+<div id="networkChangeBidModal" class="zoom-anim-dialog mfp-hide modal sm_modal">
+  <button class="modal__close md_cls" type="button"><i class="fas fa-times"></i></button>
+  <h4 class="modal-title share_link_page_h4"><%= t('collections.show.change_network') %></h4>
+  <div class="modal-body pt-10 pb-10">
+    <p class="buynow-content">
+      <span class="innertitle"><%= t('collections.show.change_network_alert') %></span>
+    </p>
+  </div>
+  <div class="modal-footer" style="text-align:right">
+  <a class="btn bidding-element-btn theme-btn" onclick="onNetworkChangeOnBid('<%=chain_id%>')">OK</a>
+    <a class="bidding-element-btn secondary-btn" data-dismiss="modal" role="button"><%= t('shared.cancel') %></a>
+  </div>
+</div>

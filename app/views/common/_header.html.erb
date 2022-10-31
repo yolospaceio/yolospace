@@ -1,0 +1,56 @@
+<header class="header all-header">
+  <div class="container">
+    <div class="row">
+      <div class="col-sm-12">
+        <div class="header__content">
+          <div class="header__logo filled-flex-custom">
+            <a href="<%= root_path %>">
+              <%= image_tag Rails.application.credentials.config[:app_header_logo], class: 'img-responsive' %>
+            </a>
+            <a class="open-modal header__action-btn header__action-btn--signin mobile-wallet" href="#connect_to_wallet">
+              <i class="far fa-wallet" aria-hidden="true"></i>
+            </a>
+          </div>
+          <%= render "common/search" %>
+          <%#= render "common/static_nav" %>
+          <div class="header__actions">
+            <div class="header__action header__action--search">
+              <button class="header__action-btn" type="button">
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+                  <path d="M21.71,20.29,18,16.61A9,9,0,1,0,16.61,18l3.68,3.68a1,1,0,0,0,1.42,0A1,1,0,0,0,21.71,20.29ZM11,18a7,7,0,1,1,7-7A7,7,0,0,1,11,18Z"/>
+                </svg>
+              </button>
+            </div>
+
+            <div class="header__action header__action--signin">
+              <div class="header__menu">
+                <ul class="header__nav">
+                  <li class="header__nav-item">
+                    <a class="header__nav-link" href="/faq"><%= t('header.HIW') %></a>
+                  </li>
+                  <li class="header__nav-item">
+                    <a class="header__nav-link" href="/about"><%= t('header.about_us') %></a>
+                  </li>
+                </ul>
+              </div>
+              <a class="open-modal header__action-btn header__action-btn--signin desktop-wallet" href="#connect_to_wallet">
+                <span>Connect Wallet</span>
+              </a>
+              <%#= render partial: 'common/language_select' %>
+              <%#= render partial: 'common/change_network' %>
+              <button class="header__btn" type="button">
+                <span></span>
+                <span></span>
+                <span></span>
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</header>
+
+
+<%= render partial: 'common/wallet_connect' %>
+<%= render partial: 'common/terms' %>

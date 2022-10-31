@@ -1,0 +1,17 @@
+<% img_url = collection[:image_url].present? ? collection[:image_url] : '/assets/banner-1.png' %>
+<% type = collection[:type] == "ERC721" ? 'single' : 'multiple' %>
+<div class="card import-card">
+  <div class="t_c">
+    <a href="<%= new_collection_path(type: type, import: true, balance: collection[:balance], token: collection[:token], contract_address: collection[:contract_address]) %>" class="card__cover">
+      <span class="collection-card-img" style="background-image: url('<%= img_url %>')">
+         <%= image_tag img_url %>
+      </span>
+    </a>
+  </div>
+
+  <div class="grid-box">
+    <h3 class="card__title" data-toggle="tooltip" data-placement="top" title="<%= collection[:title] %>">
+      <a href="<%= new_collection_path(type: type, import: true, balance: collection[:balance], token: collection[:token], contract_address: collection[:contract_address]) %>"><%= collection[:title] %></a>
+    </h3>
+  </div>
+</div>
